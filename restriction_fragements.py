@@ -8,7 +8,7 @@ import sys
 
 
 file = sys.argv[1]
-
+org = sys.argv[2]
 
 
 with open(file) as handle:
@@ -17,14 +17,8 @@ with open(file) as handle:
         gap_minimo = 5
         gap_maximo = 500
 
-
-        print('Resultados para el analisis de la secuncia:\n')
-        print(record.description)
-
         seq = record.seq
         genome_size = len(record.seq)
-
-
 
         enzimas_1 = [TaqI, AvaII, AvrII, BanI]
         enz_2 = BstNI
@@ -32,8 +26,7 @@ with open(file) as handle:
 
 
         for enz_1 in enzimas_1:
-            print('\n\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-            print('Resultados', str(enz_1), '+', str(enz_2) )
+            print('\n\n\n')
 
             sites_1 = enz_1.search(seq)
             sites_1.append(genome_size)
@@ -49,10 +42,7 @@ with open(file) as handle:
                     c += 1
                     site = sites[0]
                     end = site+site_5
-                    print('\n\n~~~~~~~~~ SECUENCIA',c,'~~~~~~~~~')
                     print(seq_string[site_5:end])
-                    print('start=', site_5, 'end=', end, 'size=', site+1)
+                    print('>', org, str(enz_1), '+', str(enz_2),'start=', site_5, 'end=', end, 'size=', site+1)
 
                 site_5 = site_3 - 1
-
-        print('\n\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
